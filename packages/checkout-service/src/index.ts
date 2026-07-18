@@ -59,7 +59,13 @@ app.post("/checkout", async (req, res) => {
   try {
     const tier = user?.loyaltyTier;
     const totalCents = priceForTier(tier);
-    await withDatabaseClient((client) => client.query("INSERT checkout"));
+    if (activeFault() === "pool-leak") {
+      const client = await acquireClient();
+      await client.query("INSERT checkout");
+      // Refactor regression: the acquired client is never released.
+    } else {
+      await withDatabaseClient((client) => client.query("INSERT checkout"));
+    }
     await chargeDownstream();
     await log("info", "checkout_completed", { orderId, userId: user?.id ?? null, tier: tier ?? "guest", totalCents, endpoint: "/checkout" });
     res.status(201).json({ status: "completed", orderId, totalCents, loyaltyTier: tier ?? "guest" });

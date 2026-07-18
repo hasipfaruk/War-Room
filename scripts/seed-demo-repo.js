@@ -6,8 +6,15 @@ const root = path.resolve(__dirname, "..");
 const repo = path.join(root, "demo", "checkout-service-repo");
 
 if (existsSync(path.join(repo, ".git"))) {
-  console.log(`Demo repository already exists at ${repo}`);
-  process.exit(0);
+  const branches = ["incident/pool-leak", "incident/guest-checkout-null-user", "incident/retry-timeout-typo"];
+  const allBranchesExist = branches.every((branchName) => {
+    try { execFileSync("git", ["show-ref", "--verify", "--quiet", `refs/heads/${branchName}`], { cwd: repo }); return true; } catch { return false; }
+  });
+  if (allBranchesExist) {
+    console.log(`Demo repository already exists at ${repo}`);
+    process.exit(0);
+  }
+  throw new Error("Demo repository is only partially seeded; all incident branches are required");
 }
 
 mkdirSync(path.join(repo, "src"), { recursive: true });

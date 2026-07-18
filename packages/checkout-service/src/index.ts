@@ -57,7 +57,8 @@ app.post("/checkout", async (req, res) => {
   const orderId = req.body?.orderId ?? crypto.randomUUID();
   const user = lookupUser(req.body?.email);
   try {
-    const tier = user?.loyaltyTier;
+    // Guest orders have no lookup record, but this deployment path assumes one.
+    const tier = activeFault() === "guest-checkout-null-user" ? user!.loyaltyTier : user?.loyaltyTier;
     const totalCents = priceForTier(tier);
     if (activeFault() === "pool-leak") {
       const client = await acquireClient();

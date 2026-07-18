@@ -1,0 +1,10 @@
+{
+  "name": "war-room",
+  "private": true,
+  "packageManager": "pnpm@10.25.0",
+  "scripts": {
+    "dev": "pnpm --parallel --stream --filter checkout-service --filter orchestrator --filter dashboard dev",
+    "build": "pnpm -r build",
+    "check": "pnpm -r check"
+  }
+}

@@ -28,15 +28,18 @@ or the dashboard.
 
 ## Quickstart
 
-Requirements: Node.js 22+, pnpm 10, git. Works on Windows, macOS, and Linux.
+Requirements: Node.js 22+, git. Works on Windows, macOS, and Linux.
 
 ```bash
+npm install -g pnpm    # if pnpm is not installed yet
 pnpm install
 cp .env.example .env   # Windows: copy .env.example .env
 pnpm dev
 ```
 
 Open http://localhost:5173, pick a scenario, and press **Deploy incident**.
+(Ports used: 5173 dashboard, 4000 orchestrator, 4001 demo service — make sure
+they are free.)
 
 - With `OPENAI_API_KEY` set in `.env`, all five agents run live on **GPT-5.6**
   (model configurable via `OPENAI_MODEL`).

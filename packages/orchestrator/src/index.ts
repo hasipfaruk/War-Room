@@ -12,7 +12,7 @@ dotenv.config({ path: path.resolve(path.dirname(fileURLToPath(import.meta.url)),
 
 type Scenario = "pool-leak" | "guest-checkout-null-user" | "retry-timeout-typo";
 type WarRoomEvent = { type: "incident" | "agent_started" | "agent_delta" | "agent_complete" | "status"; data: Record<string, unknown> };
-const scenarioCommits: Record<Scenario, string> = { "pool-leak": "refactor db helpers", "guest-checkout-null-user": "support guest checkout", "retry-timeout-typo": "tune timeouts" };
+const scenarioBranches: Record<Scenario, string> = { "pool-leak": "incident/pool-leak", "guest-checkout-null-user": "incident/guest-checkout-null-user", "retry-timeout-typo": "incident/retry-timeout-typo" };
 const app = express();
 const port = Number(process.env.PORT ?? 4000);
 const serviceUrl = process.env.CHECKOUT_SERVICE_URL ?? "http://127.0.0.1:4001";
@@ -38,7 +38,7 @@ const runGit = async (...args: string[]) => (await execFileAsync("git", args, { 
 
 async function ensureDemoRepo() {
   if (existsSync(path.join(demoRoot, ".git"))) return;
-  await execFileAsync("pnpm", ["exec", "tsx", "scripts/seed-demo-repo.ts"], { cwd: root });
+  await execFileAsync(process.execPath, ["scripts/seed-demo-repo.js"], { cwd: root });
 }
 
 async function waitForService() {
@@ -54,19 +54,17 @@ async function restartService() {
     service.kill();
     await new Promise<void>((resolve) => service?.once("exit", () => resolve()));
   }
-  const tsxCli = path.join(root, "node_modules", "tsx", "dist", "cli.mjs");
-  service = spawn(process.execPath, [tsxCli, "src/index.ts"], { cwd: demoRoot, env: { ...process.env, PORT: "4001" }, stdio: "inherit" });
+  service = spawn(process.execPath, ["src/index.js"], { cwd: demoRoot, env: { ...process.env, PORT: "4001" }, stdio: "inherit" });
   await waitForService();
 }
 
 async function deploymentFor(scenario: Scenario) {
-  const subject = scenarioCommits[scenario];
-  const guilty = await runGit("log", "main", "--format=%H", "--grep", `^${subject}$`, "-1");
-  if (!guilty) throw new Error(`could not find guilty commit for ${scenario}`);
-  const lastKnownGood = await runGit("rev-parse", `${guilty}^`);
-  await runGit("checkout", "--detach", guilty);
+  const branch = scenarioBranches[scenario];
+  const lastKnownGood = await runGit("merge-base", "main", branch);
+  await runGit("checkout", branch);
+  const deployedSha = await runGit("rev-parse", "HEAD");
   await restartService();
-  return { guilty, lastKnownGood };
+  return { deployedSha, lastKnownGood };
 }
 
 async function gitEvidence(lastKnownGood: string) {
@@ -110,7 +108,7 @@ app.get("/events", (req, res) => {
 
 app.post("/incident", async (req, res) => {
   const scenario = req.body?.scenario as Scenario;
-  if (!scenario || !(scenario in scenarioCommits)) return res.status(400).json({ error: "unknown scenario" });
+  if (!scenario || !(scenario in scenarioBranches)) return res.status(400).json({ error: "unknown scenario" });
   try {
     await ensureDemoRepo();
     const deployment = await deploymentFor(scenario);
@@ -122,7 +120,7 @@ app.post("/incident", async (req, res) => {
       if (response.ok) { alert = (await response.json() as { alert: Record<string, unknown> }).alert; break; }
     }
     if (!alert) return res.status(504).json({ error: "checkout-service did not reach the error-rate alert threshold within 15 seconds" });
-    publish({ type: "incident", data: { alert, scenario, guiltyCommit: deployment.guilty, lastKnownGood: deployment.lastKnownGood } });
+    publish({ type: "incident", data: { alert, scenario, deployedSha: deployment.deployedSha, lastKnownGood: deployment.lastKnownGood } });
     publish({ type: "status", data: { service: "checkout-service", status: "critical" } });
     if (stopTrafficTimer) clearTimeout(stopTrafficTimer);
     stopTrafficTimer = setTimeout(() => { void fetch(`${serviceUrl}/traffic/stop`, { method: "POST" }); }, 10_000);

@@ -38,8 +38,9 @@ function priceForTier(tier?: string) {
 }
 
 async function chargeDownstream() {
-  const timeoutMs = 30_000;
-  const downstreamLatencyMs = 5;
+  // Timeout tuning regression: the fault branch uses milliseconds, not seconds.
+  const timeoutMs = activeFault() === "retry-timeout-typo" ? 30 : 30_000;
+  const downstreamLatencyMs = activeFault() === "retry-timeout-typo" ? 80 : 5;
   if (downstreamLatencyMs > timeoutMs) {
     const error = new Error(`payment gateway timeout after ${timeoutMs}ms`);
     error.name = "DownstreamTimeoutError";

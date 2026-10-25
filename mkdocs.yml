@@ -1,0 +1,105 @@
+site_name: War Room
+site_description: >-
+  Documentation for War Room, an open-source AI incident-response team that finds the commit that broke production,
+  ships a verified fix and writes the postmortem.
+site_url: https://hasipfaruk.github.io/War-Room/docs/
+repo_url: https://github.com/hasipfaruk/War-Room
+repo_name: hasipfaruk/War-Room
+edit_uri: edit/main/docs/
+copyright: War Room is released under the MIT License.
+
+# The landing page lives in website/ and is published at the site root. The docs are
+# built into _site/docs so the deploy workflow can publish both together.
+site_dir: _site/docs
+
+theme:
+  name: material
+  language: en
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - navigation.footer
+    - navigation.indexes
+    - content.code.copy
+    - content.action.edit
+    - search.suggest
+    - search.highlight
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: purple
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: purple
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+extra_css:
+  - assets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/hasipfaruk/War-Room
+    - icon: material/play-circle
+      link: https://hasipfaruk.github.io/War-Room/
+      name: Watch a recorded incident
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      # Lets docs pages include repository files such as SECURITY.md and CHANGELOG.md.
+      base_path: ["."]
+      check_paths: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+
+nav:
+  - Home: index.md
+  - Getting started:
+      - Quick start: getting-started/quickstart.md
+      - Using the dashboard: getting-started/dashboard.md
+      - Scenarios: getting-started/scenarios.md
+      - Configuration: getting-started/configuration.md
+      - Troubleshooting: getting-started/troubleshooting.md
+  - How it works:
+      - Incident lifecycle: concepts/lifecycle.md
+      - The agents: concepts/agents.md
+      - Architecture: concepts/architecture.md
+  - Build on War Room:
+      - Development setup: develop/setup.md
+      - HTTP API: reference/api.md
+      - Event stream: reference/events.md
+      - Build your own dashboard: develop/custom-ui.md
+      - Add a scenario: develop/scenarios.md
+      - Add or change an agent: develop/agents.md
+  - Project:
+      - Security: project/security.md
+      - Roadmap: project/roadmap.md
+      - Changelog: project/changelog.md

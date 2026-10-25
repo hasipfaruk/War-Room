@@ -272,11 +272,28 @@ h3 {
 
 .steps li,
 .agents li,
-.scenarios article {
+.scenarios article,
+.card-link {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 22px;
+}
+
+.card-link {
+  display: block;
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.card-link:hover {
+  border-color: var(--accent);
+}
+
+.card-link h3::after {
+  content: " →";
+  color: var(--accent-soft);
 }
 
 .steps p,
@@ -787,6 +804,12 @@ h3 {
   display: flex;
   justify-content: space-between;
   gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
   flex-wrap: wrap;
 }
 

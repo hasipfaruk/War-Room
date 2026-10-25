@@ -1,0 +1,37 @@
+# Keeps npm packages, docs tooling and GitHub Actions up to date with monthly grouped pull requests.
+# The cooldown skips releases younger than a few days, when most bad versions are caught.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    cooldown:
+      default-days: 5
+    groups:
+      npm-dependencies:
+        patterns:
+          - "*"
+
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 5
+    groups:
+      docs-dependencies:
+        patterns:
+          - "*"
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 5
+    groups:
+      github-actions:
+        patterns:
+          - "*"

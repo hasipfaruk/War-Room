@@ -1,0 +1,4 @@
+# Code owners are asked to review every pull request.
+# Add owners for specific paths as the project grows, for example:
+#   /apps/dashboard/  @some-contributor
+* @hasipfaruk

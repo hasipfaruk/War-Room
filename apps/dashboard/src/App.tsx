@@ -63,7 +63,7 @@ export function App() {
           busy={submitting || state.running}
         />
       </section>
-      <AgentFeed messages={state.messages} running={state.running} />
+      <AgentFeed messages={state.messages} running={state.running} agentCount={state.agentCount} />
       <Results fix={state.fix} postmortem={state.postmortem} />
     </main>
   );

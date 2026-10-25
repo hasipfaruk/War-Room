@@ -1,0 +1,4 @@
+# Documentation toolchain. Install with: python -m pip install -r requirements-docs.txt
+# Stay on MkDocs 1.x: MkDocs 2.0 removes the plugin and theme system that Material for MkDocs needs.
+mkdocs==1.6.1
+mkdocs-material==9.7.7

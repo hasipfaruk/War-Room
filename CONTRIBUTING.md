@@ -1,15 +1,32 @@
 # Contributing to War Room
 
-Thanks for helping. Bug reports, scenarios and pull requests are all welcome.
+Thanks for helping. Bug reports, new scenarios, documentation fixes and pull requests are all welcome. By taking part
+you agree to the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Where to start
+
+- **Found a bug?** [Open a bug report](https://github.com/hasipfaruk/War-Room/issues/new/choose).
+- **Have an idea?** Open a feature request first for anything large, so we can agree on the approach before you
+  write code.
+- **Want something to work on?** The [roadmap](https://hasipfaruk.github.io/War-Room/docs/project/roadmap/) lists
+  planned work and good first issues.
+- **Found a security problem?** Do not open an issue. Follow [SECURITY.md](SECURITY.md).
 
 ## Setup
+
+You need Node.js 22+, git and pnpm. No API key is needed: without one War Room runs in demo mode.
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-You don't need an API key: without one, War Room runs in demo mode (see the README).
+The [development guide](https://hasipfaruk.github.io/War-Room/docs/develop/setup/) explains the commands, the tests and
+how to work on the docs and the website. These guides cover the most common changes:
+
+- [Add a scenario](https://hasipfaruk.github.io/War-Room/docs/develop/scenarios/)
+- [Add or change an agent](https://hasipfaruk.github.io/War-Room/docs/develop/agents/)
+- [Build your own dashboard](https://hasipfaruk.github.io/War-Room/docs/develop/custom-ui/)
 
 ## Before you open a pull request
 
@@ -20,25 +37,14 @@ pnpm build
 pnpm test:e2e
 ```
 
-CI runs the same steps on Linux, macOS and Windows.
+If you changed the docs, also run `mkdocs build --strict` (see the development guide).
 
-## Adding an incident scenario
+CI runs the same checks on Linux, macOS and Windows, and builds the docs.
 
-1. In `scripts/seed-demo-repo.js`, create a branch from `main`, add some innocent history, then add **one** guilty
-   commit that produces a real, logged failure on `/checkout`. Follow the existing scenarios.
-2. Add the branch name to the `branches` list at the top of the seed script.
-3. Add the scenario to `apps/server/src/scenarios.ts`. `guiltySubject` must match the guilty commit's message
-   exactly; only demo mode uses it.
-4. Delete `sandbox/` so the repository is reseeded, then run `pnpm build && pnpm test:e2e`. The new scenario is tested
-   automatically.
+## Pull request guidelines
 
-## Adding or changing an agent
-
-Agents are defined in `apps/server/src/agents.ts` and wired together in `apps/server/src/incident.ts`. Each one
-needs a demo-mode script in `apps/server/src/demo-scripts.ts`, so the project stays testable without credentials.
-Pass any logs, diffs or source to the model through `untrusted(...)`.
-
-## Code style
-
-Prettier formats the code (`pnpm format`). Keep modules small and focused, and add a comment where the reason for
-the code isn't obvious from the code itself.
+- Keep each pull request to one change, and explain why in the description.
+- Update the docs when behavior or usage changes.
+- Add a line to `CHANGELOG.md` under `[Unreleased]` for anything users will notice.
+- Demo mode must keep working without an API key. Every agent needs a demo script.
+- Never commit API keys, `.env` files or generated folders (`sandbox/`, `dist/`, `_site/`).

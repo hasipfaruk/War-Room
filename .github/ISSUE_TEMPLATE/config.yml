@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a security vulnerability (private)
+    url: https://github.com/hasipfaruk/War-Room/security/advisories/new
+    about: Please report security problems privately, not as a public issue.
+  - name: Documentation
+    url: https://hasipfaruk.github.io/War-Room/docs/
+    about: Setup, configuration, the API and guides for building on War Room.

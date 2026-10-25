@@ -1,15 +1,18 @@
 # War Room
 
 [![CI](https://github.com/hasipfaruk/War-Room/actions/workflows/ci.yml/badge.svg)](https://github.com/hasipfaruk/War-Room/actions/workflows/ci.yml)
+[![Docs](https://img.shields.io/badge/docs-online-7c3aed.svg)](https://hasipfaruk.github.io/War-Room/docs/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **An AI incident-response team you can watch work.** War Room deploys a real regression into a real service, then
 five AI agents diagnose the outage, name the guilty commit, ship a fix, prove the service recovered and write the
 postmortem. Every agent's reasoning streams live to a mission-control dashboard.
 
-**Website and live replay:** <https://hasipfaruk.github.io/War-Room/>
+**[Website and recorded replay](https://hasipfaruk.github.io/War-Room/)** ·
+**[Documentation](https://hasipfaruk.github.io/War-Room/docs/)** ·
+**[Contributing](CONTRIBUTING.md)**
 
-![War Room dashboard after resolving a pool-leak incident](docs/screenshot.png)
+![War Room dashboard after resolving a pool-leak incident](docs/assets/screenshot.png)
 
 ## How an incident runs
 
@@ -117,7 +120,22 @@ apps/
 scripts/
   seed-demo-repo.js  writes the sandbox service and its git history
   e2e-demo.mjs       end-to-end test of every scenario in demo mode
+website/        landing page with a recorded incident replay
+docs/           documentation site (MkDocs Material)
 ```
+
+The [architecture page](https://hasipfaruk.github.io/War-Room/docs/concepts/architecture/) explains how the pieces fit
+together.
+
+## Build on War Room
+
+The server exposes a small [HTTP API](https://hasipfaruk.github.io/War-Room/docs/reference/api/) and a live
+[event stream](https://hasipfaruk.github.io/War-Room/docs/reference/events/), so you can build your own dashboard,
+bot or wall display on top of it. Guides:
+
+- [Build your own dashboard](https://hasipfaruk.github.io/War-Room/docs/develop/custom-ui/)
+- [Add a scenario](https://hasipfaruk.github.io/War-Room/docs/develop/scenarios/)
+- [Add or change an agent](https://hasipfaruk.github.io/War-Room/docs/develop/agents/)
 
 ## Development
 
@@ -129,7 +147,9 @@ scripts/
 | `pnpm test:e2e` | Runs every scenario end to end in demo mode (run `pnpm build` first) |
 | `pnpm format`   | Formats the code with Prettier                                       |
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for how to add a scenario or an agent.
+See [CONTRIBUTING.md](CONTRIBUTING.md) to send a change, and the
+[development guide](https://hasipfaruk.github.io/War-Room/docs/develop/setup/) for working on the docs and website.
+Changes are listed in [CHANGELOG.md](CHANGELOG.md).
 
 ## Limitations and roadmap
 
@@ -142,10 +162,17 @@ yet something to point at production systems. Planned work:
 - Support other model providers
 - Add a cancel button for a running incident
 
+The [roadmap](https://hasipfaruk.github.io/War-Room/docs/project/roadmap/) has details and good first issues.
+
 ## Security
 
 The Fixer agent writes code that War Room then runs. Read [SECURITY.md](SECURITY.md) before changing `HOST` or
 pointing War Room at anything other than the bundled sandbox.
+
+## Community
+
+Everyone taking part in War Room agrees to the [Code of Conduct](CODE_OF_CONDUCT.md). Questions and ideas are welcome
+as [issues](https://github.com/hasipfaruk/War-Room/issues).
 
 ## License
 

@@ -6,3 +6,7 @@ dist/
 
 # Runtime data: the seeded sandbox repository and generated postmortems
 sandbox/
+
+# Built website and docs, and the Python environment for MkDocs
+_site/
+.venv/

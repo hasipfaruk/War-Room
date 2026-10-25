@@ -1,6 +1,7 @@
 import express, { type NextFunction, type Request, type Response } from "express";
 import { existsSync } from "node:fs";
 import path from "node:path";
+import { agentRoster } from "./agents.js";
 import { config, demoMode, repoRoot } from "./config.js";
 import { subscribe } from "./events.js";
 import { ensureDemoRepo } from "./git.js";
@@ -31,7 +32,11 @@ api.get("/scenarios", (_req, res) => {
 });
 
 api.get("/events", (_req, res) => {
-  subscribe(res, { mode: demoMode ? "demo" : "live", model: demoMode ? undefined : config.model });
+  subscribe(res, {
+    mode: demoMode ? "demo" : "live",
+    model: demoMode ? undefined : config.model,
+    agents: agentRoster,
+  });
 });
 
 api.post("/incident", async (req, res) => {

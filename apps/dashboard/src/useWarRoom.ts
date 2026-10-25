@@ -6,6 +6,8 @@ export type WarRoomState = {
   connectionLost: boolean;
   mode?: Mode;
   model?: string;
+  /** Number of agents in the server's pipeline, from the `hello` event. */
+  agentCount?: number;
   status: Status;
   statusMessage?: string;
   scenarioLabel?: string;
@@ -47,12 +49,18 @@ function reducer(state: WarRoomState, action: Action): WarRoomState {
       return { ...state, connectionLost: true };
     // Sent first on every (re)connection, followed by a replay of the current incident.
     case "hello":
-      return { ...initialState, mode: action.data.mode, model: action.data.model };
+      return {
+        ...initialState,
+        mode: action.data.mode,
+        model: action.data.model,
+        agentCount: action.data.agents?.length,
+      };
     case "incident_started":
       return {
         ...initialState,
         mode: state.mode,
         model: state.model,
+        agentCount: state.agentCount,
         scenarioLabel: action.data.label,
         running: true,
       };

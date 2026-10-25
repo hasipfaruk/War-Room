@@ -33,7 +33,7 @@ export type Postmortem = { path: string; content: string };
 
 /** Payload of each server-sent event, keyed by event name. */
 export type EventPayloads = {
-  hello: { mode: Mode; model?: string };
+  hello: { mode: Mode; model?: string; agents: { name: string; color: string }[] };
   incident_started: { scenario: string; label: string };
   incident: { alert: Alert };
   status: { status: Status; message?: string };

@@ -34,6 +34,7 @@
           <a href="#how">How it works</a>
           <a href="#demo">Replay</a>
           <a href="#start">Quick start</a>
+          <a href="docs/">Docs</a>
           <a class="nav-cta" href="https://github.com/hasipfaruk/War-Room">GitHub</a>
         </nav>
       </div>
@@ -241,7 +242,10 @@
               You need Node.js 22+, git and pnpm. No API key is required: without one, War Room runs in demo mode. Add
               an OpenAI API key to <code>.env</code> to make the agents live.
             </p>
-            <p class="muted small">Works on Windows, macOS and Linux.</p>
+            <p class="muted small">
+              Works on Windows, macOS and Linux. The <a href="docs/getting-started/quickstart/">full quick start</a>
+              covers live mode and production builds.
+            </p>
           </div>
           <div class="code">
             <button type="button" class="chip copy" id="copy">Copy</button>
@@ -256,6 +260,31 @@ pnpm dev</pre>
         </div>
       </section>
 
+      <section class="section" aria-labelledby="build-title">
+        <div class="wrap">
+          <p class="eyebrow">Open source</p>
+          <h2 id="build-title">Build on War Room</h2>
+          <p class="section-lede">
+            The server has a small HTTP API and a live event stream. Anything that reads the stream can be a War Room
+            client, and every part of the pipeline is meant to be changed.
+          </p>
+          <div class="scenarios">
+            <a class="card-link" href="docs/develop/custom-ui/">
+              <h3>Build your own dashboard</h3>
+              <p>A wall display, a terminal UI or a chat bot. A working client fits in one HTML file.</p>
+            </a>
+            <a class="card-link" href="docs/develop/scenarios/">
+              <h3>Add a scenario</h3>
+              <p>Write a new bug into the sandbox's git history and see whether the agents can find it.</p>
+            </a>
+            <a class="card-link" href="docs/develop/agents/">
+              <h3>Add or change an agent</h3>
+              <p>Edit prompts, add a new agent to the chain or plug in a different model provider.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section class="section" aria-labelledby="safety-title">
         <div class="wrap safety">
           <h2 id="safety-title">Safety checks</h2>
@@ -265,7 +294,7 @@ pnpm dev</pre>
             <li>A patch must parse, start and lower the error rate before War Room keeps it.</li>
             <li>Only one incident runs at a time, so two runs never fight over the same repository.</li>
           </ul>
-          <a href="https://github.com/hasipfaruk/War-Room/blob/main/SECURITY.md">Read the security model →</a>
+          <a href="docs/project/security/">Read the security model →</a>
         </div>
       </section>
     </main>
@@ -273,7 +302,11 @@ pnpm dev</pre>
     <footer class="footer">
       <div class="wrap footer-inner">
         <span>War Room · MIT License</span>
-        <a href="https://github.com/hasipfaruk/War-Room">Source on GitHub</a>
+        <span class="footer-links">
+          <a href="docs/">Documentation</a>
+          <a href="https://github.com/hasipfaruk/War-Room/blob/main/CONTRIBUTING.md">Contributing</a>
+          <a href="https://github.com/hasipfaruk/War-Room">Source on GitHub</a>
+        </span>
       </div>
     </footer>
 

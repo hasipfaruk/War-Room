@@ -8,7 +8,9 @@ const initials = (agent: string) =>
     .map((word) => word[0])
     .join("");
 
-export function AgentFeed({ messages, running }: { messages: AgentMessage[]; running: boolean }) {
+type Props = { messages: AgentMessage[]; running: boolean; agentCount?: number };
+
+export function AgentFeed({ messages, running, agentCount }: Props) {
   const feed = useRef<HTMLDivElement>(null);
   const pinned = useRef(true);
 
@@ -32,7 +34,10 @@ export function AgentFeed({ messages, running }: { messages: AgentMessage[]; run
             {running ? "Agents are investigating" : messages.length ? "Response complete" : "Awaiting incident signal"}
           </h2>
         </div>
-        <span>{messages.length} / 5 AGENTS</span>
+        <span>
+          {messages.length}
+          {agentCount ? ` / ${agentCount}` : ""} AGENTS
+        </span>
       </div>
       <div className="feed" ref={feed} onScroll={onScroll} aria-busy={running}>
         {messages.length ? (

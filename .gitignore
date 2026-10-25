@@ -1,6 +1,8 @@
 node_modules/
 dist/
-.env
-**/logs/
 *.tsbuildinfo
-demo/
+*.log
+.env
+
+# Runtime data: the seeded sandbox repository and generated postmortems
+sandbox/

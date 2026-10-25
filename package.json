@@ -1,10 +1,22 @@
 {
   "name": "war-room",
   "private": true,
+  "description": "An AI incident-response team that diagnoses an outage, finds the guilty commit, ships a verified fix and writes the postmortem.",
+  "license": "MIT",
   "packageManager": "pnpm@10.25.0",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "dev": "pnpm --parallel --stream --filter orchestrator --filter dashboard dev",
+    "dev": "pnpm -r --parallel --stream dev",
     "build": "pnpm -r build",
-    "check": "pnpm -r check"
+    "start": "pnpm --filter @war-room/server start",
+    "check": "pnpm -r check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:e2e": "node scripts/e2e-demo.mjs"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3"
   }
 }

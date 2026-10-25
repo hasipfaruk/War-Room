@@ -1,7 +1,7 @@
 {
-  "name": "orchestrator",
+  "name": "@war-room/server",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
@@ -10,13 +10,11 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "openai": "^5.12.2"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.3",
     "@types/node": "^22.15.3",
     "tsx": "^4.19.3",

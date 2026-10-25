@@ -2,7 +2,8 @@ import { useEffect, useReducer } from "react";
 import type { AgentMessage, Alert, EventPayloads, Fix, Mode, Postmortem, ServerEvent, Status } from "./types";
 
 export type WarRoomState = {
-  connected: boolean;
+  /** True after the event stream drops, until the server says hello again. False while first connecting. */
+  connectionLost: boolean;
   mode?: Mode;
   model?: string;
   status: Status;
@@ -17,7 +18,7 @@ export type WarRoomState = {
 
 type Action = ServerEvent | { type: "disconnected" };
 
-const initialState: WarRoomState = { connected: false, status: "nominal", messages: [], running: false };
+const initialState: WarRoomState = { connectionLost: false, status: "nominal", messages: [], running: false };
 
 const eventTypes: (keyof EventPayloads)[] = [
   "hello",
@@ -43,14 +44,13 @@ function updateLatest(state: WarRoomState, agent: string, update: (message: Agen
 function reducer(state: WarRoomState, action: Action): WarRoomState {
   switch (action.type) {
     case "disconnected":
-      return { ...state, connected: false };
+      return { ...state, connectionLost: true };
     // Sent first on every (re)connection, followed by a replay of the current incident.
     case "hello":
-      return { ...initialState, connected: true, mode: action.data.mode, model: action.data.model };
+      return { ...initialState, mode: action.data.mode, model: action.data.model };
     case "incident_started":
       return {
         ...initialState,
-        connected: true,
         mode: state.mode,
         model: state.model,
         scenarioLabel: action.data.label,

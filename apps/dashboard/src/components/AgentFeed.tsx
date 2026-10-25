@@ -28,7 +28,9 @@ export function AgentFeed({ messages, running }: { messages: AgentMessage[]; run
       <div className="feed-heading">
         <div>
           <p className="label">MULTI-AGENT INCIDENT FEED</p>
-          <h2>{running ? "Agents are investigating" : "Awaiting incident signal"}</h2>
+          <h2>
+            {running ? "Agents are investigating" : messages.length ? "Response complete" : "Awaiting incident signal"}
+          </h2>
         </div>
         <span>{messages.length} / 5 AGENTS</span>
       </div>

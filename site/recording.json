@@ -1,0 +1,551 @@
+[
+  { "t": 0, "type": "incident_started", "data": { "scenario": "guest-checkout-null-user", "label": "Guest checkout" } },
+  { "t": 1, "type": "status", "data": { "status": "deploying" } },
+  {
+    "t": 5205,
+    "type": "incident",
+    "data": {
+      "alert": {
+        "timestamp": "2026-10-25T22:17:44.855Z",
+        "level": "error",
+        "service": "checkout-service",
+        "event": "error_rate_alert",
+        "endpoint": "/checkout",
+        "error": "TypeError: Cannot read properties of null (reading 'loyaltyTier')",
+        "errorRate": 1,
+        "sampleSize": 12,
+        "threshold": 0.2
+      },
+      "scenario": "guest-checkout-null-user",
+      "deployedSha": "2093fbae3095a2c8a2480ac34760b8a38309f748",
+      "lastKnownGood": "3ab90c4d79051939144ad9952bc2a0df0777bba5"
+    }
+  },
+  { "t": 5205, "type": "status", "data": { "status": "critical" } },
+  { "t": 5205, "type": "status", "data": { "status": "investigating" } },
+  { "t": 5373, "type": "agent_started", "data": { "agent": "Triage", "color": "#60a5fa", "simulated": true } },
+  {
+    "t": 5373,
+    "type": "agent_delta",
+    "data": { "agent": "Triage", "color": "#60a5fa", "delta": "SEV-1: checkout-service " }
+  },
+  { "t": 5447, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "is failing " } },
+  { "t": 5510, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "100% of " } },
+  { "t": 5573, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "checkouts on " } },
+  {
+    "t": 5635,
+    "type": "agent_delta",
+    "data": { "agent": "Triage", "color": "#60a5fa", "delta": "/checkout.\n\nPlan:\n" }
+  },
+  { "t": 5698, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "1. Confirm " } },
+  { "t": 5760, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "the error " } },
+  { "t": 5823, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "signature in " } },
+  { "t": 5885, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "the latest " } },
+  {
+    "t": 5949,
+    "type": "agent_delta",
+    "data": { "agent": "Triage", "color": "#60a5fa", "delta": "structured logs.\n" }
+  },
+  { "t": 6012, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "2. Compare " } },
+  { "t": 6075, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "the deployed " } },
+  { "t": 6137, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "commits against " } },
+  { "t": 6198, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "the last " } },
+  { "t": 6260, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "known good " } },
+  { "t": 6324, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "release.\n3. " } },
+  { "t": 6387, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "Apply the " } },
+  { "t": 6450, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "smallest safe " } },
+  { "t": 6513, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "fix, redeploy " } },
+  { "t": 6577, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "and measure " } },
+  { "t": 6639, "type": "agent_delta", "data": { "agent": "Triage", "color": "#60a5fa", "delta": "recovery." } },
+  {
+    "t": 6655,
+    "type": "agent_complete",
+    "data": {
+      "agent": "Triage",
+      "color": "#60a5fa",
+      "message": "SEV-1: checkout-service is failing 100% of checkouts on /checkout.\n\nPlan:\n1. Confirm the error signature in the latest structured logs.\n2. Compare the deployed commits against the last known good release.\n3. Apply the smallest safe fix, redeploy and measure recovery."
+    }
+  },
+  { "t": 6655, "type": "agent_started", "data": { "agent": "Log Detective", "color": "#f59e0b", "simulated": true } },
+  { "t": 6655, "type": "agent_delta", "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "1. **Most " } },
+  { "t": 6717, "type": "agent_delta", "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "likely: a " } },
+  {
+    "t": 6779,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "regression in " }
+  },
+  {
+    "t": 6843,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "the checkout " }
+  },
+  {
+    "t": 6903,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "path.** Every " }
+  },
+  {
+    "t": 6967,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "recent `checkout_failed` " }
+  },
+  {
+    "t": 7029,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "entry reports " }
+  },
+  {
+    "t": 7091,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "`TypeError: Cannot " }
+  },
+  {
+    "t": 7154,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "read properties " }
+  },
+  { "t": 7217, "type": "agent_delta", "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "of null " } },
+  {
+    "t": 7279,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "(reading 'loyaltyTier')`.\n" }
+  },
+  {
+    "t": 7342,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "2. Failures " }
+  },
+  {
+    "t": 7404,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "began immediately " }
+  },
+  { "t": 7467, "type": "agent_delta", "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "after the " } },
+  {
+    "t": 7530,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "deploy, and " }
+  },
+  {
+    "t": 7594,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "`checkout_completed` events " }
+  },
+  {
+    "t": 7656,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "disappeared at " }
+  },
+  { "t": 7719, "type": "agent_delta", "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "the same " } },
+  { "t": 7782, "type": "agent_delta", "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "time.\n3. " } },
+  {
+    "t": 7845,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "Less likely: " }
+  },
+  {
+    "t": 7909,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "a downstream " }
+  },
+  {
+    "t": 7971,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "outage. The " }
+  },
+  {
+    "t": 8033,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "failures are " }
+  },
+  {
+    "t": 8095,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "uniform rather " }
+  },
+  {
+    "t": 8158,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "than intermittent, " }
+  },
+  {
+    "t": 8221,
+    "type": "agent_delta",
+    "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "which points " }
+  },
+  { "t": 8284, "type": "agent_delta", "data": { "agent": "Log Detective", "color": "#f59e0b", "delta": "at code." } },
+  {
+    "t": 8330,
+    "type": "agent_complete",
+    "data": {
+      "agent": "Log Detective",
+      "color": "#f59e0b",
+      "message": "1. **Most likely: a regression in the checkout path.** Every recent `checkout_failed` entry reports `TypeError: Cannot read properties of null (reading 'loyaltyTier')`.\n2. Failures began immediately after the deploy, and `checkout_completed` events disappeared at the same time.\n3. Less likely: a downstream outage. The failures are uniform rather than intermittent, which points at code."
+    }
+  },
+  { "t": 8330, "type": "agent_started", "data": { "agent": "Git Detective", "color": "#a78bfa", "simulated": true } },
+  {
+    "t": 8330,
+    "type": "agent_delta",
+    "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "Demo mode: " }
+  },
+  {
+    "t": 8392,
+    "type": "agent_delta",
+    "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "this verdict " }
+  },
+  {
+    "t": 8455,
+    "type": "agent_delta",
+    "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "is scripted " }
+  },
+  { "t": 8518, "type": "agent_delta", "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "for the " } },
+  {
+    "t": 8582,
+    "type": "agent_delta",
+    "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "\"Guest checkout\" " }
+  },
+  {
+    "t": 8645,
+    "type": "agent_delta",
+    "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "scenario.\n\nCommit " }
+  },
+  {
+    "t": 8708,
+    "type": "agent_delta",
+    "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "03c6a9e (\"support " }
+  },
+  {
+    "t": 8771,
+    "type": "agent_delta",
+    "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "guest checkout\") " }
+  },
+  {
+    "t": 8834,
+    "type": "agent_delta",
+    "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "changes the " }
+  },
+  { "t": 8897, "type": "agent_delta", "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "code path " } },
+  { "t": 8960, "type": "agent_delta", "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "named in " } },
+  { "t": 9024, "type": "agent_delta", "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "the alert " } },
+  { "t": 9085, "type": "agent_delta", "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "and logs. " } },
+  { "t": 9148, "type": "agent_delta", "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "The other " } },
+  {
+    "t": 9210,
+    "type": "agent_delta",
+    "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "commits in " }
+  },
+  { "t": 9273, "type": "agent_delta", "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "the range " } },
+  {
+    "t": 9336,
+    "type": "agent_delta",
+    "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "only touch " }
+  },
+  {
+    "t": 9397,
+    "type": "agent_delta",
+    "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "docs, request " }
+  },
+  { "t": 9458, "type": "agent_delta", "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "IDs and " } },
+  {
+    "t": 9521,
+    "type": "agent_delta",
+    "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "cache headers.\n\n" }
+  },
+  {
+    "t": 9584,
+    "type": "agent_delta",
+    "data": { "agent": "Git Detective", "color": "#a78bfa", "delta": "VERDICT: 03c6a9e" }
+  },
+  {
+    "t": 9631,
+    "type": "agent_complete",
+    "data": {
+      "agent": "Git Detective",
+      "color": "#a78bfa",
+      "message": "Demo mode: this verdict is scripted for the \"Guest checkout\" scenario.\n\nCommit 03c6a9e (\"support guest checkout\") changes the code path named in the alert and logs. The other commits in the range only touch docs, request IDs and cache headers.\n\nVERDICT: 03c6a9e"
+    }
+  },
+  { "t": 9632, "type": "status", "data": { "status": "fixing" } },
+  { "t": 9691, "type": "agent_started", "data": { "agent": "Fixer", "color": "#34d399", "simulated": true } },
+  { "t": 9691, "type": "agent_delta", "data": { "agent": "Fixer", "color": "#34d399", "delta": "Demo mode: " } },
+  { "t": 9756, "type": "agent_delta", "data": { "agent": "Fixer", "color": "#34d399", "delta": "no model " } },
+  { "t": 9818, "type": "agent_delta", "data": { "agent": "Fixer", "color": "#34d399", "delta": "is configured, " } },
+  { "t": 9880, "type": "agent_delta", "data": { "agent": "Fixer", "color": "#34d399", "delta": "so I " } },
+  { "t": 9944, "type": "agent_delta", "data": { "agent": "Fixer", "color": "#34d399", "delta": "will revert " } },
+  { "t": 10007, "type": "agent_delta", "data": { "agent": "Fixer", "color": "#34d399", "delta": "the guilty " } },
+  { "t": 10070, "type": "agent_delta", "data": { "agent": "Fixer", "color": "#34d399", "delta": "commit on " } },
+  { "t": 10131, "type": "agent_delta", "data": { "agent": "Fixer", "color": "#34d399", "delta": "a fix " } },
+  { "t": 10193, "type": "agent_delta", "data": { "agent": "Fixer", "color": "#34d399", "delta": "branch, redeploy " } },
+  { "t": 10254, "type": "agent_delta", "data": { "agent": "Fixer", "color": "#34d399", "delta": "and measure " } },
+  { "t": 10317, "type": "agent_delta", "data": { "agent": "Fixer", "color": "#34d399", "delta": "recovery." } },
+  {
+    "t": 10332,
+    "type": "agent_complete",
+    "data": {
+      "agent": "Fixer",
+      "color": "#34d399",
+      "message": "Demo mode: no model is configured, so I will revert the guilty commit on a fix branch, redeploy and measure recovery."
+    }
+  },
+  {
+    "t": 16061,
+    "type": "fix_available",
+    "data": {
+      "branch": "fix/guest-checkout-null-user",
+      "diff": "commit 389ed2e8a52befad0578152888cdae39d9d9d23e\nAuthor: War Room Fixer <fixer@war-room.invalid>\nDate:   Mon Oct 26 03:17:50 2026 +0000\n\n    Revert \"support guest checkout\"\n    \n    This reverts commit 03c6a9ed80abeacb7940cb63456f4efc629dbf7d.\n\ndiff --git a/src/index.js b/src/index.js\nindex 1231af5..192be91 100644\n--- a/src/index.js\n+++ b/src/index.js\n@@ -33,7 +33,7 @@ http.createServer(async (req, res) => {\n   if (req.method === \"GET\" && url.pathname === \"/health\") { await log(\"info\", \"health_check\", { pool: poolStats() }); return json(res, 200, { status: \"ok\", service: \"checkout-service\", pool: poolStats() }); }\n   if (req.method === \"POST\" && url.pathname === \"/checkout\") {\n     const payload = await body(req); const orderId = payload.orderId || crypto.randomUUID(); const requestId = req.headers[\"x-request-id\"] || crypto.randomUUID(); const user = lookupUser(payload.email);\n-    try { const tier = user.loyaltyTier; const totalCents = priceForTier(tier); await withDatabaseClient((client) => client.query(\"INSERT checkout\")); await chargeDownstream(); await log(\"info\", \"checkout_completed\", { orderId, requestId, userId: user && user.id, totalCents, endpoint: \"/checkout\" }); res.setHeader(\"cache-control\", \"no-store\"); return json(res, 201, { status: \"completed\", orderId, totalCents }); }\n+    try { const totalCents = priceForTier(user && user.loyaltyTier); await withDatabaseClient((client) => client.query(\"INSERT checkout\")); await chargeDownstream(); await log(\"info\", \"checkout_completed\", { orderId, requestId, userId: user && user.id, totalCents, endpoint: \"/checkout\" }); return json(res, 201, { status: \"completed\", orderId, totalCents }); }\n     catch (error) { const err = error instanceof Error ? error : new Error(String(error)); await log(\"error\", \"checkout_failed\", { orderId, requestId, endpoint: \"/checkout\", error: err.name + \": \" + err.message, stack: err.stack }); return json(res, 500, { status: \"failed\", orderId, error: err.message }); }\n   }\n   if (req.method === \"POST\" && url.pathname === \"/traffic/start\") { clearInterval(trafficTimer); await rm(logFile, { force: true }); startTraffic(); await log(\"info\", \"traffic_started\"); return json(res, 202, { accepted: true }); }",
+      "method": "revert",
+      "beforeErrorRate": 1,
+      "afterErrorRate": 0.05263157894736842,
+      "sampleSize": 38
+    }
+  },
+  { "t": 16061, "type": "status", "data": { "status": "resolved" } },
+  { "t": 16107, "type": "agent_started", "data": { "agent": "Scribe", "color": "#fb7185", "simulated": true } },
+  { "t": 16107, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "# Postmortem: " } },
+  {
+    "t": 16179,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "Guest checkout\n\n" }
+  },
+  { "t": 16241, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "## Summary\n" } },
+  {
+    "t": 16303,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "checkout-service failed " }
+  },
+  { "t": 16365, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "100% of " } },
+  { "t": 16427, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "checkouts after " } },
+  { "t": 16490, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "a deploy. " } },
+  { "t": 16553, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "War Room " } },
+  { "t": 16616, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "identified the " } },
+  {
+    "t": 16679,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "regression, deployed " }
+  },
+  { "t": 16741, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "a fix " } },
+  {
+    "t": 16802,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "from `fix/guest-checkout-null-user` " }
+  },
+  { "t": 16864, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "and the " } },
+  { "t": 16927, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "error rate " } },
+  { "t": 16989, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "fell to " } },
+  { "t": 17052, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "5%.\n\n## " } },
+  { "t": 17113, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "Timeline\n- " } },
+  {
+    "t": 17175,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "2026-10-25T22:17:39.654Z: Regression " }
+  },
+  {
+    "t": 17237,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "deployed (scenario: " }
+  },
+  {
+    "t": 17302,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "Guest checkout)\n" }
+  },
+  {
+    "t": 17363,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "- 2026-10-25T22:17:39.655Z: " }
+  },
+  {
+    "t": 17426,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "Status DEPLOYING\n" }
+  },
+  {
+    "t": 17487,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "- 2026-10-25T22:17:44.859Z: " }
+  },
+  {
+    "t": 17550,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "Error-rate alert " }
+  },
+  { "t": 17613, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "fired at " } },
+  {
+    "t": 17676,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "100%: TypeError: " }
+  },
+  { "t": 17737, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "Cannot read " } },
+  { "t": 17798, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "properties of " } },
+  { "t": 17858, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "null (reading " } },
+  {
+    "t": 17920,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "'loyaltyTier')\n- " }
+  },
+  {
+    "t": 17983,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "2026-10-25T22:17:44.859Z: Status " }
+  },
+  { "t": 18046, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "CRITICAL\n- " } },
+  {
+    "t": 18109,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "2026-10-25T22:17:44.859Z: Status " }
+  },
+  {
+    "t": 18172,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "INVESTIGATING\n- " }
+  },
+  {
+    "t": 18236,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "2026-10-25T22:17:45.027Z: Triage " }
+  },
+  { "t": 18298, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "started\n- " } },
+  {
+    "t": 18361,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "2026-10-25T22:17:46.309Z: Triage " }
+  },
+  { "t": 18422, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "finished\n- " } },
+  {
+    "t": 18485,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "2026-10-25T22:17:46.309Z: Log " }
+  },
+  {
+    "t": 18547,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "Detective started\n" }
+  },
+  {
+    "t": 18609,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "- 2026-10-25T22:17:47.984Z: " }
+  },
+  { "t": 18672, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "Log Detective " } },
+  { "t": 18734, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "finished\n- " } },
+  {
+    "t": 18795,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "2026-10-25T22:17:47.984Z: Git " }
+  },
+  {
+    "t": 18859,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "Detective started\n" }
+  },
+  {
+    "t": 18922,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "- 2026-10-25T22:17:49.285Z: " }
+  },
+  { "t": 18984, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "Git Detective " } },
+  { "t": 19046, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "finished\n- " } },
+  {
+    "t": 19109,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "2026-10-25T22:17:49.286Z: Status " }
+  },
+  { "t": 19170, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "FIXING\n- " } },
+  {
+    "t": 19232,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "2026-10-25T22:17:49.345Z: Fixer " }
+  },
+  { "t": 19295, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "started\n- " } },
+  {
+    "t": 19359,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "2026-10-25T22:17:49.986Z: Fixer " }
+  },
+  { "t": 19420, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "finished\n- " } },
+  {
+    "t": 19482,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "2026-10-25T22:17:55.715Z: Fix " }
+  },
+  { "t": 19545, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "deployed from " } },
+  {
+    "t": 19607,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "fix/guest-checkout-null-user by " }
+  },
+  { "t": 19669, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "revert; error " } },
+  { "t": 19731, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "rate 100% " } },
+  { "t": 19793, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "→ 5%\n" } },
+  {
+    "t": 19854,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "- 2026-10-25T22:17:55.715Z: " }
+  },
+  {
+    "t": 19918,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "Status RESOLVED\n\n" }
+  },
+  { "t": 19981, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "## Root " } },
+  { "t": 20043, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "Cause\nCommit " } },
+  {
+    "t": 20105,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "`03c6a9e support " }
+  },
+  { "t": 20168, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "guest checkout` " } },
+  { "t": 20229, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "introduced a " } },
+  { "t": 20291, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "regression in " } },
+  { "t": 20356, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "the checkout " } },
+  { "t": 20419, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "path (null " } },
+  {
+    "t": 20480,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "user dereference).\n\n" }
+  },
+  { "t": 20544, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "## Resolution\n" } },
+  { "t": 20605, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "The fix " } },
+  { "t": 20667, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "was applied " } },
+  { "t": 20730, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "by reverting " } },
+  { "t": 20793, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "the guilty " } },
+  {
+    "t": 20855,
+    "type": "agent_delta",
+    "data": { "agent": "Scribe", "color": "#fb7185", "delta": "commit, redeployed " }
+  },
+  { "t": 20918, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "and verified " } },
+  { "t": 20979, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "with replayed " } },
+  { "t": 21042, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "traffic.\n\n## " } },
+  { "t": 21105, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "Action Items\n" } },
+  { "t": 21167, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "- Add " } },
+  { "t": 21229, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "a regression " } },
+  { "t": 21291, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "test covering " } },
+  { "t": 21353, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "this failure.\n" } },
+  { "t": 21415, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "- Gate " } },
+  { "t": 21477, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "deploys on " } },
+  { "t": 21539, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "checkout error " } },
+  { "t": 21601, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "rate.\n- " } },
+  { "t": 21663, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "Require review " } },
+  { "t": 21726, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "for changes " } },
+  { "t": 21789, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "to the " } },
+  { "t": 21851, "type": "agent_delta", "data": { "agent": "Scribe", "color": "#fb7185", "delta": "checkout path." } },
+  {
+    "t": 21899,
+    "type": "agent_complete",
+    "data": {
+      "agent": "Scribe",
+      "color": "#fb7185",
+      "message": "# Postmortem: Guest checkout\n\n## Summary\ncheckout-service failed 100% of checkouts after a deploy. War Room identified the regression, deployed a fix from `fix/guest-checkout-null-user` and the error rate fell to 5%.\n\n## Timeline\n- 2026-10-25T22:17:39.654Z: Regression deployed (scenario: Guest checkout)\n- 2026-10-25T22:17:39.655Z: Status DEPLOYING\n- 2026-10-25T22:17:44.859Z: Error-rate alert fired at 100%: TypeError: Cannot read properties of null (reading 'loyaltyTier')\n- 2026-10-25T22:17:44.859Z: Status CRITICAL\n- 2026-10-25T22:17:44.859Z: Status INVESTIGATING\n- 2026-10-25T22:17:45.027Z: Triage started\n- 2026-10-25T22:17:46.309Z: Triage finished\n- 2026-10-25T22:17:46.309Z: Log Detective started\n- 2026-10-25T22:17:47.984Z: Log Detective finished\n- 2026-10-25T22:17:47.984Z: Git Detective started\n- 2026-10-25T22:17:49.285Z: Git Detective finished\n- 2026-10-25T22:17:49.286Z: Status FIXING\n- 2026-10-25T22:17:49.345Z: Fixer started\n- 2026-10-25T22:17:49.986Z: Fixer finished\n- 2026-10-25T22:17:55.715Z: Fix deployed from fix/guest-checkout-null-user by revert; error rate 100% → 5%\n- 2026-10-25T22:17:55.715Z: Status RESOLVED\n\n## Root Cause\nCommit `03c6a9e support guest checkout` introduced a regression in the checkout path (null user dereference).\n\n## Resolution\nThe fix was applied by reverting the guilty commit, redeployed and verified with replayed traffic.\n\n## Action Items\n- Add a regression test covering this failure.\n- Gate deploys on checkout error rate.\n- Require review for changes to the checkout path."
+    }
+  },
+  {
+    "t": 21902,
+    "type": "postmortem",
+    "data": {
+      "path": "sandbox/postmortems/2026-10-25T22-18-01-554Z-guest-checkout-null-user.md",
+      "content": "# Postmortem: Guest checkout\n\n## Summary\ncheckout-service failed 100% of checkouts after a deploy. War Room identified the regression, deployed a fix from `fix/guest-checkout-null-user` and the error rate fell to 5%.\n\n## Timeline\n- 2026-10-25T22:17:39.654Z: Regression deployed (scenario: Guest checkout)\n- 2026-10-25T22:17:39.655Z: Status DEPLOYING\n- 2026-10-25T22:17:44.859Z: Error-rate alert fired at 100%: TypeError: Cannot read properties of null (reading 'loyaltyTier')\n- 2026-10-25T22:17:44.859Z: Status CRITICAL\n- 2026-10-25T22:17:44.859Z: Status INVESTIGATING\n- 2026-10-25T22:17:45.027Z: Triage started\n- 2026-10-25T22:17:46.309Z: Triage finished\n- 2026-10-25T22:17:46.309Z: Log Detective started\n- 2026-10-25T22:17:47.984Z: Log Detective finished\n- 2026-10-25T22:17:47.984Z: Git Detective started\n- 2026-10-25T22:17:49.285Z: Git Detective finished\n- 2026-10-25T22:17:49.286Z: Status FIXING\n- 2026-10-25T22:17:49.345Z: Fixer started\n- 2026-10-25T22:17:49.986Z: Fixer finished\n- 2026-10-25T22:17:55.715Z: Fix deployed from fix/guest-checkout-null-user by revert; error rate 100% → 5%\n- 2026-10-25T22:17:55.715Z: Status RESOLVED\n\n## Root Cause\nCommit `03c6a9e support guest checkout` introduced a regression in the checkout path (null user dereference).\n\n## Resolution\nThe fix was applied by reverting the guilty commit, redeployed and verified with replayed traffic.\n\n## Action Items\n- Add a regression test covering this failure.\n- Gate deploys on checkout error rate.\n- Require review for changes to the checkout path."
+    }
+  }
+]

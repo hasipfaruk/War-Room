@@ -47,7 +47,7 @@ export function App() {
   const banner = requestError ?? state.statusMessage;
   return (
     <main>
-      <Header status={state.status} mode={state.mode} model={state.model} connected={state.connected} />
+      <Header status={state.status} mode={state.mode} model={state.model} connectionLost={state.connectionLost} />
       {banner && (
         <p className={`banner ${state.status === "failed" || requestError ? "error" : "warning"}`} role="alert">
           {banner}

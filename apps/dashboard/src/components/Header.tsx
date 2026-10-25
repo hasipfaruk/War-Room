@@ -2,9 +2,9 @@ import type { Mode, Status } from "../types";
 
 const lifecycle: Status[] = ["nominal", "critical", "investigating", "fixing", "resolved"];
 
-type Props = { status: Status; mode?: Mode; model?: string; connected: boolean };
+type Props = { status: Status; mode?: Mode; model?: string; connectionLost: boolean };
 
-export function Header({ status, mode, model, connected }: Props) {
+export function Header({ status, mode, model, connectionLost }: Props) {
   // "deploying" sits before the alert fires and "failed" can happen at any step;
   // neither advances the lifecycle track.
   const reached = lifecycle.indexOf(status);
@@ -24,7 +24,7 @@ export function Header({ status, mode, model, connected }: Props) {
               </span>
             )}
             {mode === "live" && <span className="badge live">LIVE · {model}</span>}
-            {!connected && <span className="badge offline">Reconnecting to server…</span>}
+            {connectionLost && <span className="badge offline">Reconnecting to server…</span>}
           </div>
         </div>
         <div className={`status ${status}`} role="status" aria-live="polite">

@@ -7,7 +7,9 @@
 five AI agents diagnose the outage, name the guilty commit, ship a fix, prove the service recovered and write the
 postmortem. Every agent's reasoning streams live to a mission-control dashboard.
 
-<!-- Add a screenshot or GIF of the dashboard here: docs/screenshot.png -->
+**Website and live replay:** <https://hasipfaruk.github.io/War-Room/>
+
+![War Room dashboard after resolving a pool-leak incident](docs/screenshot.png)
 
 ## How an incident runs
 
@@ -25,8 +27,8 @@ postmortem. Every agent's reasoning streams live to a mission-control dashboard.
    | **Fixer**         | Writes a patch on a `fix/*` branch. If it doesn't parse, start or fix the error rate, War Room reverts instead |
    | **Scribe**        | Writes a postmortem from the real incident timeline                                                            |
 
-4. **Verify.** The fix is redeployed, traffic is replayed and the error rate is measured again (typically 67–100%
-   before, about 5% after).
+4. **Verify.** The fix is redeployed, traffic is replayed and the error rate is measured again (typically 67% to
+   100% before, about 5% after).
 
 The guilty commit sits among innocent ones, and neither the agents nor the dashboard are told which one it is.
 

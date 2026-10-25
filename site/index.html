@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>War Room: AI incident response</title>
+    <meta
+      name="description"
+      content="Open-source AI incident response. War Room detects an outage, finds the guilty commit, ships a verified fix and writes the postmortem, streaming every step live."
+    />
+    <meta name="theme-color" content="#090b12" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="War Room: AI incident response" />
+    <meta
+      property="og:description"
+      content="Five AI agents diagnose an outage, name the guilty commit, ship a verified fix and write the postmortem."
+    />
+    <meta property="og:url" content="https://hasipfaruk.github.io/War-Room/" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23090b12'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23a78bfa' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%2362e6ba'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top" aria-label="War Room home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          War Room
+        </a>
+        <nav aria-label="Primary">
+          <a href="#how">How it works</a>
+          <a href="#demo">Replay</a>
+          <a href="#start">Quick start</a>
+          <a class="nav-cta" href="https://github.com/hasipfaruk/War-Room">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="wrap">
+          <p class="eyebrow">Open-source · MIT licensed</p>
+          <h1>When production breaks,<br /><span>find the commit and fix it.</span></h1>
+          <p class="lede">
+            War Room is an AI incident-response team. It sees the outage, finds the commit that caused it, ships a fix,
+            checks that the service recovered and writes the postmortem. You can watch each step live.
+          </p>
+          <div class="cta-row">
+            <a class="button primary" href="#demo">Watch an incident</a>
+            <a class="button" href="https://github.com/hasipfaruk/War-Room">View on GitHub</a>
+          </div>
+          <dl class="stats">
+            <div>
+              <dt>Agents on call</dt>
+              <dd>5</dd>
+            </div>
+            <div>
+              <dt>Demo run, end to end</dt>
+              <dd>22&nbsp;s</dd>
+            </div>
+            <div>
+              <dt>Error rate</dt>
+              <dd>100% → 5%</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="section" id="how" aria-labelledby="how-title">
+        <div class="wrap">
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-title">From outage to postmortem</h2>
+          <p class="section-lede">
+            The outage is real. War Room deploys a real bug into a real service and fixes it with real git commits.
+          </p>
+          <ol class="steps">
+            <li>
+              <span class="step-num">01</span>
+              <h3>Deploy</h3>
+              <p>A branch with a buggy commit is checked out and the service restarts from it.</p>
+            </li>
+            <li>
+              <span class="step-num">02</span>
+              <h3>Detect</h3>
+              <p>Traffic hits the service, stack traces land in the logs and an error-rate alert fires.</p>
+            </li>
+            <li>
+              <span class="step-num">03</span>
+              <h3>Respond</h3>
+              <p>Five agents read the alert, logs and diffs, then name the guilty commit from evidence alone.</p>
+            </li>
+            <li>
+              <span class="step-num">04</span>
+              <h3>Verify</h3>
+              <p>The fix is redeployed and traffic is replayed. Recovery is measured, not assumed.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section demo-section" id="demo" aria-labelledby="demo-title">
+        <div class="wrap">
+          <p class="eyebrow">Replay</p>
+          <h2 id="demo-title">Watch a full incident in under 30 seconds</h2>
+          <p class="section-lede">
+            This is a recording of a real run in demo mode. The agents' text is scripted, but the deploy, the alert, the
+            git revert and the recovery numbers all came from the running service.
+          </p>
+
+          <div class="console" id="console">
+            <div class="console-bar">
+              <div class="console-title">
+                <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                checkout-service · scenario: Guest checkout
+              </div>
+              <div class="console-controls">
+                <button type="button" class="chip" id="speed" aria-label="Playback speed">1×</button>
+                <button type="button" class="chip play" id="play">▶ Play incident</button>
+              </div>
+            </div>
+            <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+            <div class="console-body">
+              <div class="console-head">
+                <ol class="lifecycle" id="lifecycle" aria-label="Incident lifecycle">
+                  <li data-step="nominal">Nominal</li>
+                  <li data-step="critical">Critical</li>
+                  <li data-step="investigating">Investigating</li>
+                  <li data-step="fixing">Fixing</li>
+                  <li data-step="resolved">Resolved</li>
+                </ol>
+                <div class="pill" id="status" role="status" aria-live="polite">● NOMINAL</div>
+              </div>
+
+              <div class="console-grid">
+                <aside class="alert-card" id="alert">
+                  <p class="label">Latest alert</p>
+                  <p class="muted" id="alert-empty">Standing by. Press play to deploy the regression.</p>
+                  <div id="alert-body" hidden>
+                    <h3>Checkout error-rate breach</h3>
+                    <code id="alert-error"></code>
+                    <div class="metrics">
+                      <span>Error rate <b id="alert-rate"></b></span>
+                      <span>Endpoint <b id="alert-endpoint"></b></span>
+                    </div>
+                  </div>
+                  <div class="fix-card" id="fix" hidden>
+                    <p class="label">Fix verified</p>
+                    <p class="fix-rate"><span id="fix-before"></span> → <b id="fix-after"></b></p>
+                    <p class="muted small" id="fix-branch"></p>
+                  </div>
+                </aside>
+
+                <div class="feed" id="feed" aria-label="Agent feed">
+                  <p class="empty" id="feed-empty">Each agent's reasoning will stream here.</p>
+                </div>
+              </div>
+
+              <details class="result" id="diff-wrap" hidden>
+                <summary>Fix diff</summary>
+                <pre id="diff"></pre>
+              </details>
+              <details class="result" id="postmortem-wrap" hidden open>
+                <summary>Postmortem <small id="postmortem-path"></small></summary>
+                <div class="markdown" id="postmortem"></div>
+              </details>
+            </div>
+          </div>
+          <noscript><p class="muted">Turn on JavaScript to watch the replay.</p></noscript>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="agents-title">
+        <div class="wrap">
+          <p class="eyebrow">The team</p>
+          <h2 id="agents-title">The five agents</h2>
+          <p class="section-lede">They run in order, and each one reads what the previous ones found.</p>
+          <ul class="agents">
+            <li style="--agent: #60a5fa">
+              <span class="avatar">T</span>
+              <h3>Triage</h3>
+              <p>Reads the alert, sets severity and plans the investigation.</p>
+            </li>
+            <li style="--agent: #f59e0b">
+              <span class="avatar">LD</span>
+              <h3>Log Detective</h3>
+              <p>Ranks hypotheses, each backed by quoted log lines.</p>
+            </li>
+            <li style="--agent: #a78bfa">
+              <span class="avatar">GD</span>
+              <h3>Git Detective</h3>
+              <p>Reads the deployed diffs and names the guilty commit.</p>
+            </li>
+            <li style="--agent: #34d399">
+              <span class="avatar">F</span>
+              <h3>Fixer</h3>
+              <p>Writes a patch. If the patch doesn't work, War Room reverts the commit instead.</p>
+            </li>
+            <li style="--agent: #fb7185">
+              <span class="avatar">S</span>
+              <h3>Scribe</h3>
+              <p>Writes the postmortem from the real incident timeline.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="scenarios-title">
+        <div class="wrap">
+          <p class="eyebrow">Built-in incidents</p>
+          <h2 id="scenarios-title">Three bugs you can deploy</h2>
+          <div class="scenarios">
+            <article>
+              <h3>Pool leak</h3>
+              <p>A refactor drops a connection <code>release()</code>, and the database pool runs dry.</p>
+              <code class="sig">database pool exhausted</code>
+            </article>
+            <article>
+              <h3>Guest checkout</h3>
+              <p>A new feature removes a null guard, and every guest checkout crashes.</p>
+              <code class="sig">TypeError: Cannot read properties of null</code>
+            </article>
+            <article>
+              <h3>Timeout tuning</h3>
+              <p>A config change sets 30&nbsp;ms where 30&nbsp;s was intended, and payments time out.</p>
+              <code class="sig">payment gateway timeout after 30ms</code>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="start" aria-labelledby="start-title">
+        <div class="wrap start">
+          <div>
+            <p class="eyebrow">Quick start</p>
+            <h2 id="start-title">Run it on your machine</h2>
+            <p class="section-lede">
+              You need Node.js 22+, git and pnpm. No API key is required: without one, War Room runs in demo mode. Add
+              an OpenAI API key to <code>.env</code> to make the agents live.
+            </p>
+            <p class="muted small">Works on Windows, macOS and Linux.</p>
+          </div>
+          <div class="code">
+            <button type="button" class="chip copy" id="copy">Copy</button>
+            <pre id="commands">
+git clone https://github.com/hasipfaruk/War-Room.git
+cd War-Room
+pnpm install
+cp .env.example .env
+pnpm dev</pre>
+            <p class="code-note">Then open <code>http://localhost:5173</code> and press <b>Deploy incident</b>.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="safety-title">
+        <div class="wrap safety">
+          <h2 id="safety-title">Safety checks</h2>
+          <ul>
+            <li>Only reachable from your own machine. Requests from other sites are refused.</li>
+            <li>Your API key never reaches the service that runs AI-written code.</li>
+            <li>A patch must parse, start and lower the error rate before War Room keeps it.</li>
+            <li>Only one incident runs at a time, so two runs never fight over the same repository.</li>
+          </ul>
+          <a href="https://github.com/hasipfaruk/War-Room/blob/main/SECURITY.md">Read the security model →</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <span>War Room · MIT License</span>
+        <a href="https://github.com/hasipfaruk/War-Room">Source on GitHub</a>
+      </div>
+    </footer>
+
+    <script src="replay.js" defer></script>
+  </body>
+</html>

@@ -245,7 +245,7 @@ async function commitRevert(guiltySha: string) {
 }
 
 function describe({ type, data }: WarRoomEvent) {
-  const line = (text: string) => `- ${data.timestamp} — ${text}`;
+  const line = (text: string) => `- ${data.timestamp}: ${text}`;
   switch (type) {
     case "incident_started":
       return line(`Regression deployed (scenario: ${data.label})`);
